@@ -43,6 +43,8 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            api(libs.androidx.datastore.preferences.core)
+            api(libs.androidx.datastore.core.okio)
         }
     }
 }
