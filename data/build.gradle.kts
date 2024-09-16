@@ -24,6 +24,9 @@ kotlin {
             api(libs.androidx.datastore.preferences.core)
             api(libs.androidx.datastore.core.okio)
             implementation(libs.ktor.client.core)
+            implementation(libs.ktor.serialization)
+            implementation(libs.ktor.client.json)
+            implementation(libs.ktor.content.negotiation)
             implementation(libs.koin.core)
         }
         commonTest.dependencies {
