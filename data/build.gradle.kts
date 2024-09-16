@@ -18,11 +18,17 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             api(libs.androidx.datastore.preferences.core)
             api(libs.androidx.datastore.core.okio)
             implementation(libs.ktor.client.core)
+            implementation(libs.koin.core)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.koin.test)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
