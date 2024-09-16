@@ -7,7 +7,9 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import dev.kako351.anysky.kmp.data.TokenDataStore.Companion.ACCESS_TOKEN
+import dev.kako351.anysky.kmp.data.TokenDataStore.Companion.REFRESH_TOKEN
 import dev.kako351.anysky.kmp.data.model.auth.AccessToken
+import dev.kako351.anysky.kmp.data.model.auth.RefreshToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okio.Path.Companion.toPath
@@ -27,6 +29,7 @@ interface TokenDataStore {
     val accessToken: Flow<AccessToken>?
 
     suspend fun saveAccessToken(token: AccessToken)
+    suspend fun saveRefreshToken(token: RefreshToken)
 }
 
 internal class TokenDataStoreImpl(
@@ -43,6 +46,12 @@ internal class TokenDataStoreImpl(
     override suspend fun saveAccessToken(token: AccessToken) {
         dataStore?.edit {
             it[stringPreferencesKey(ACCESS_TOKEN)] = token.value
+        }
+    }
+
+    override suspend fun saveRefreshToken(token: RefreshToken) {
+        dataStore?.edit {
+            it[stringPreferencesKey(REFRESH_TOKEN)] = token.value
         }
     }
 }

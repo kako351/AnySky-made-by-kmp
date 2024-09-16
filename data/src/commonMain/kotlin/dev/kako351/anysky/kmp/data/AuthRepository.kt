@@ -13,7 +13,8 @@ interface AuthRepository {
 }
 
 internal class AuthRepositoryImpl(
-    private val authApiService: AuthApiService
+    private val authApiService: AuthApiService,
+    private val tokenDataStore: TokenDataStore
 ): AuthRepository {
     override suspend fun login(email: String, password: String): LoginResult = withContext(Dispatchers.IO) {
         return@withContext try {
@@ -23,6 +24,9 @@ internal class AuthRepositoryImpl(
                 accessToken = AccessToken(response.accessJwt),
                 refreshToken = RefreshToken(response.refreshJwt)
             )
+
+            tokenDataStore.saveAccessToken(AccessToken(response.accessJwt))
+            tokenDataStore.saveRefreshToken(RefreshToken(response.refreshJwt))
 
             LoginResult.Success(authentication = authentication)
         } catch (e: Exception) {
