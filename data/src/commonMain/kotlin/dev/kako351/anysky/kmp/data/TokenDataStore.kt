@@ -10,3 +10,13 @@ fun createDataStore(producePath: () -> String): DataStore<Preferences> = Prefere
 )
 
 internal const val dataStoreFileName = "any_sky_token.preferences_pb"
+
+interface TokenDataStore {
+
+}
+
+class TokenDataStoreImpl: TokenDataStore {
+    private val dataStore = createDataStore { dataStoreFileName }
+
+}
+
