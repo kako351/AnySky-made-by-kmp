@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -18,6 +19,8 @@ import anysky_made_by_kmp.composeapp.generated.resources.Res
 import anysky_made_by_kmp.composeapp.generated.resources.compose_multiplatform
 import kotlinx.coroutines.flow.MutableStateFlow
 import dev.kako351.anysky.kmp.data.TokenDataStore
+import dev.kako351.anysky.kmp.data.model.auth.AccessToken
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -30,7 +33,10 @@ fun App(
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
+            Button(onClick = {
+                showContent = !showContent
+                viewModel.onClick()
+            }) {
                 Text("Click me!")
             }
 
@@ -53,5 +59,17 @@ class MainViewModel(
 ): ViewModel() {
     val state = MutableStateFlow("Hello, World")
 
+    init {
+        viewModelScope.launch {
+            tokenDataStore.accessToken?.collect {
+                state.value = it.value
+            }
+        }
+    }
 
+    fun onClick() {
+        viewModelScope.launch {
+            tokenDataStore.saveAccessToken(AccessToken("test"))
+        }
+    }
 }
