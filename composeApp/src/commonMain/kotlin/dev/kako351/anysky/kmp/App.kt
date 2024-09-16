@@ -37,11 +37,8 @@ enum class AppScreen {
 @Composable
 @Preview
 fun App(
-    viewModel: MainViewModel = koinViewModel(),
     navHostController: NavHostController = rememberNavController()
 ) {
-    val state by viewModel.state.collectAsState()
-
     MaterialTheme {
         NavHost(
             navController = navHostController,
