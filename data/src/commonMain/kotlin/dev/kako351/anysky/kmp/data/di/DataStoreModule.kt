@@ -12,5 +12,5 @@ import org.koin.dsl.module
 val dataStoreModule = module {
     single<TokenDataStore> { TokenDataStoreImpl(get()) }
     single<AuthApiService> { AuthApiServiceImpl() }
-    single<AuthRepository> { AuthRepositoryImpl(get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(), get()) }
 }
