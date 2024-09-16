@@ -18,7 +18,7 @@ interface AuthApiService {
     suspend fun createSession(identifier: String, password: String): CreateSessionResponse
 }
 
-internal class AuthRepositoryImpl: AuthApiService {
+internal class AuthApiServiceImpl: AuthApiService {
     override val client = HttpClient() {
         install(ContentNegotiation) {
             json(json = kotlinx.serialization.json.Json {
