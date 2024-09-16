@@ -8,7 +8,6 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import dev.kako351.anysky.kmp.data.TokenDataStore.Companion.ACCESS_TOKEN
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.single
 import okio.Path.Companion.toPath
 
 fun createDataStore(producePath: () -> String): DataStore<Preferences> = PreferenceDataStoreFactory.createWithPath(
@@ -26,7 +25,7 @@ interface TokenDataStore {
     val accessToken: Flow<String>?
 }
 
-class TokenDataStoreImpl(
+internal class TokenDataStoreImpl(
     private val context: Context
 ): TokenDataStore {
     private val dataStore: DataStore<Preferences>? = getDataStore(context)

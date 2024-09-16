@@ -8,5 +8,6 @@ fun startKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
     appDeclaration()
     modules(
         dataStoreModule,
+        viewModelModule,
     )
 }
