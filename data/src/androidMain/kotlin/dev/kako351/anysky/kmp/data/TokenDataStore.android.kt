@@ -7,3 +7,5 @@ import androidx.datastore.preferences.core.Preferences
 fun createDataStore(context: Context): DataStore<Preferences> = createDataStore(
     producePath = { context.filesDir.resolve(dataStoreFileName).absolutePath }
 )
+
+actual fun TokenDataStore.getDataStore(context: Any?) : DataStore<Preferences>? = (context as? Context)?.let { createDataStore(it) }

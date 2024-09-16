@@ -24,7 +24,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 @Composable
 @Preview
 fun App(
-    dataStore: DataStore<Preferences>? = null,
     viewModel: MainViewModel = viewModel { MainViewModel() }
 ) {
     val state by viewModel.state.collectAsState()

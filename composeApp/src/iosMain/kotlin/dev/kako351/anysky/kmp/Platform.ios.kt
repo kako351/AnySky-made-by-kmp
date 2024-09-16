@@ -7,5 +7,3 @@ class IOSPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
-
-actual fun getDataStore(context: Any?): DataStore<Preferences>? = null

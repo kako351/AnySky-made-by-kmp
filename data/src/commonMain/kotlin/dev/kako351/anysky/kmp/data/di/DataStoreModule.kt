@@ -5,5 +5,5 @@ import dev.kako351.anysky.kmp.data.TokenDataStoreImpl
 import org.koin.dsl.module
 
 val dataStoreModule = module {
-    single<TokenDataStore> { TokenDataStoreImpl() }
+    single<TokenDataStore> { TokenDataStoreImpl(get()) }
 }

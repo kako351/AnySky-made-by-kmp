@@ -9,5 +9,3 @@ interface Platform {
 
 expect fun getPlatform(): Platform
 
-
-expect fun getDataStore(context: Any? = null): DataStore<Preferences>?

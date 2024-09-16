@@ -11,3 +11,5 @@ fun createDataStore(): DataStore<Preferences> = createDataStore(
         requireNotNull(documentDirectory).path + "/$dataStoreFileName"
     }
 )
+
+actual fun TokenDataStore.getDataStore(context: Any?) : DataStore<Preferences>? = null
