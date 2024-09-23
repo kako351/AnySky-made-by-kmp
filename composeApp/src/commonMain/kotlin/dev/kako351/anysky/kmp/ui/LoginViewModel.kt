@@ -13,6 +13,8 @@ class LoginViewModel(
 ): ViewModel() {
     private val _state = MutableStateFlow<LoginState>(LoginState.Initial)
     val state = _state.asStateFlow()
+    private val _uiState = MutableStateFlow(LoginUiState())
+    val uiState = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -27,10 +29,27 @@ class LoginViewModel(
         }
     }
 
+    fun updateEmail(email: String) {
+        _uiState.update {
+            it.copy(email = email)
+        }
+    }
+
+    fun updatePassword(password: String) {
+        _uiState.update {
+            it.copy(password = password)
+        }
+    }
+
     sealed class LoginState {
         data object Initial: LoginState()
         data object AlreadyLogin: LoginState()
         data object LoginSuccess: LoginState()
         data object LoginFailed: LoginState()
     }
+
+    data class LoginUiState(
+        val email: String = "",
+        val password: String = ""
+    )
 }
