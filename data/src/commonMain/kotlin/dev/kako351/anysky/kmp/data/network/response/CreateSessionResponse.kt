@@ -1,5 +1,9 @@
 package dev.kako351.anysky.kmp.data.network.response
 
+import kotlinx.serialization.Serializable
+
+@Suppress("PLUGIN_IS_NOT_ENABLED")
+@Serializable
 data class CreateSessionResponse(
     val accessJwt: String,
     val active: Boolean,
@@ -10,5 +14,5 @@ data class CreateSessionResponse(
     val emailConfirmed: Boolean,
     val handle: String,
     val refreshJwt: String,
-    val status: String
+    val status: String? = null
 )
