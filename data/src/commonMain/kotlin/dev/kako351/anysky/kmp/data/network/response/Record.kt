@@ -9,7 +9,7 @@ data class Record(
     @SerialName("createdAt")
     val createdAt: String,
     @SerialName("langs")
-    val langs: List<String>,
+    val langs: List<String>? = null,
     @SerialName("text")
     val text: String,
 )

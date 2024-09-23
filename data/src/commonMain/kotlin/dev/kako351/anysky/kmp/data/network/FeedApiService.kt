@@ -7,6 +7,7 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
+import io.ktor.client.request.setBody
 import io.ktor.serialization.kotlinx.json.json
 
 interface FeedApiService {
@@ -39,9 +40,7 @@ class FeedApiServiceImpl: FeedApiService {
                 append("Accept", "application/json")
                 append("Authorization", "Bearer $token")
             }
-            url {
-                parameters.append("actor", actor)
-            }
+            setBody(mapOf("actor" to actor))
         }
         return response.body()
     }

@@ -21,14 +21,14 @@ class LoginViewModel(
 
     init {
         viewModelScope.launch {
-//            tokenDataStore.accessToken?.collect {
-//                if(it.value.isNotEmpty()) {
-//                    println("already login: accessToken: ${it.value}")
-//                    _state.update {
-//                        LoginState.AlreadyLogin
-//                    }
-//                }
-//            }
+            tokenDataStore.accessToken?.collect {
+                if(it.value.isNotEmpty()) {
+                    println("already login: accessToken: ${it.value}")
+                    _state.update {
+                        LoginState.AlreadyLogin
+                    }
+                }
+            }
         }
     }
 
