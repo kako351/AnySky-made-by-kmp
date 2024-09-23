@@ -2,6 +2,7 @@ package dev.kako351.anysky.kmp.data
 
 import dev.kako351.anysky.kmp.data.model.auth.AccessToken
 import dev.kako351.anysky.kmp.data.model.auth.Authentication
+import dev.kako351.anysky.kmp.data.model.auth.Handle
 import dev.kako351.anysky.kmp.data.model.auth.RefreshToken
 import dev.kako351.anysky.kmp.data.network.AuthApiService
 import dev.kako351.anysky.kmp.data.result.LoginResult
@@ -22,11 +23,13 @@ internal class AuthRepositoryImpl(
 
             val authentication = Authentication(
                 accessToken = AccessToken(response.accessJwt),
-                refreshToken = RefreshToken(response.refreshJwt)
+                refreshToken = RefreshToken(response.refreshJwt),
+                handle = Handle(response.handle)
             )
 
             tokenDataStore.saveAccessToken(AccessToken(response.accessJwt))
             tokenDataStore.saveRefreshToken(RefreshToken(response.refreshJwt))
+            tokenDataStore.saveHandle(Handle(response.handle))
 
             LoginResult.Success(authentication = authentication)
         } catch (e: Exception) {
