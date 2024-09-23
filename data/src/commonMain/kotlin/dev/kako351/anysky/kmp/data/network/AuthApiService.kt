@@ -7,11 +7,13 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.headers
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.parameters
 import io.ktor.serialization.kotlinx.json.json
 
 interface AuthApiService {
     companion object {
-        const val CREATE_SESSION_URL = "https://public.api.bsky.app/xrpc/com.atproto.server.createSession"
+        const val CREATE_SESSION_URL = "https://bsky.social/xrpc/com.atproto.server.createSession"
     }
     val client: HttpClient
 
@@ -38,10 +40,7 @@ internal class AuthApiServiceImpl: AuthApiService {
                 append("Content-Type", "application/json")
                 append("Accept", "application/json")
             }
-            url {
-                parameters.append("identifier", identifier)
-                parameters.append("password", password)
-            }
+            setBody(mapOf("identifier" to identifier, "password" to password))
         }
         return response.body()
     }
