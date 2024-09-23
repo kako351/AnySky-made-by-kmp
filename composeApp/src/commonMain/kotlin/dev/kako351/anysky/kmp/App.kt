@@ -36,7 +36,7 @@ fun App(
         ) {
             composable(AppScreen.Login.name) {
                 LoginScreen(
-                    onLoginClicked = {
+                    onLogin = {
                         navHostController.navigate(AppScreen.Feeds.name)
                     }
                 )
